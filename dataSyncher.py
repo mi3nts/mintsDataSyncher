@@ -39,6 +39,6 @@ for nodeID in nodeIDs:
             # sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
             # print(sysStr)
             # os.system(sysStr)
-            sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
+            sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder + "/raw"
             print(sysStr)
             os.system(sysStr)
