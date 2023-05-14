@@ -1,0 +1,20 @@
+
+dataFolder : "/Users/lakitha/mintsData"
+nodeIDs:
+  - e45f018020e9
+  - e45f018020cb
+  - e45f018020c7
+  - e45f017b9a66
+  - e45f01802105
+  - e45f017b9205
+    
+startDate: "2023_05_01" 
+endDate: "2023_05_15"
+
+sensorIDs:
+  - BME280
+  - IPS7100
+  - SCD30V2
+  - MWBR001
+  - GPSGPGGA2
+  - GPSGPRMC2
