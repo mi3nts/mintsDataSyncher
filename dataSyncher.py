@@ -40,5 +40,5 @@ for nodeID in nodeIDs:
             # print(sysStr)
             # os.system(sysStr)
             sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder + "/raw"
-            print(sysStr)
+            # print(sysStr)
             os.system(sysStr)
