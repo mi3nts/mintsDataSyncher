@@ -1,20 +1,35 @@
 
-dataFolder : "/Users/lakitha/mintsData"
+dataFolder : "/Users/lakitha/mintsData/raw"
+dataFolderMqtt : "/Users/lakitha/mintsData/rawMqtt"
+
+
 nodeIDs:
-  - e45f018020e9
-  - e45f018020cb
-  - e45f018020c7
-  - e45f017b9a66
-  - e45f01802105
-  - e45f017b9205
+   - 2cf7f12032305202
+  # - e45f018020cb
+  # - e45f018020c7
+  # - e45f017b9a66
+  # - e45f01802105
+  # - e45f017b9205
     
-startDate: "2023_05_01" 
-endDate: "2023_05_15"
+startDate: "2023_06_15" 
+endDate: "2023_06_16"
 
 sensorIDs:
-  - BME280
   - IPS7100
+  - IPS7100CNR
+  - BME280
+  - BME688CNR
+  - SCD30
   - SCD30V2
+  - AS7265X
   - MWBR001
+  - GPGGAPL
+  - GPRMCPL
+  - MBCLR001
+  - MBCLR002  
   - GPSGPGGA2
   - GPSGPRMC2
+  - GPSGPGGA2
+  - GPSGPRMC2
+  - MacAD
+  

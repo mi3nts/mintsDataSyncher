@@ -11,6 +11,7 @@ mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
 print(mintsDefinitions)
 nodeIDs            = mintsDefinitions['nodeIDs']
 dataFolder         = mintsDefinitions['dataFolder']
+dataFolderMqtt         = mintsDefinitions['dataFolderMqtt']
 sensorIDs          = mintsDefinitions['sensorIDs']
 
 print()
@@ -26,19 +27,28 @@ delta      = timedelta(days=1)
 
  
 for nodeID in nodeIDs:
+   
     print("========================NODES========================")
+    print("Syncing node data for node "+ nodeID)
     currentDate = startDate
+    includeStatements = " "
+    
     while currentDate <= endDate:
         print("========================DATES========================")
         currentDateStr = currentDate.strftime("%Y_%m_%d")
         currentDate   += delta
+
         for sensorID in sensorIDs:
             print("========================SENSORS========================")
             print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
-            # print("rsync command:")
-            # sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
-            # print(sysStr)
-            # os.system(sysStr)
-            sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder + "/raw"
-            print(sysStr)
-            # os.system(sysStr)
+            includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
+            includeStatements = includeStatements + includeStatement;
+                
+    sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
+    print(sysStr)
+    os.system(sysStr)
+
+    sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
+    print(sysStr)
+    os.system(sysStr)
+
