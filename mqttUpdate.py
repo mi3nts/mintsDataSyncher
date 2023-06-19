@@ -96,30 +96,34 @@ def syncDataViaMQTT(nodeID,sensorID):
     csvDataFiles = glob.glob(dataFolder + "/raw/" + nodeID + "/*/*/*/*"+sensorID+"*.csv")
     csvDataFiles.sort()
     print(csvDataFiles)
+
     for csvFile in csvDataFiles:
         print("================================================")
         print("File Name")
         print(csvFile)
-        # try:
+            # try:
         with open(csvFile, "r") as f:
             sensorID          = csvFile.split("_")[-4]
             reader            = csv.DictReader((line.replace('\0','') for line in f) )
             rowList           = list(reader)
             latestDateTime    = readLatestTime(nodeID,sensorID)
-            csvLatestDateTime = datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                        
+            try:
+                csvLatestDateTime = datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+            except Exception as e:
+                csvLatestDateTime = datetime.strptime(rowList[-2]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+
             if csvLatestDateTime > latestDateTime:
                 for rowData in rowList:
-                    # try:
+                    try:
                         dateTimeRow = datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                         if dateTimeRow > latestDateTime:
                             print("Publishing MQTT Data ==> Node ID:"+nodeID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
                             mL.writeMQTTLatestWearable(nodeID,sensorID,rowData)  
-                            time.sleep(0.001)
-                                            
-                        # except Exception as e:
-                        #     print(e)
-                        #     print("Data row not published")
+                            time.sleep(0.0025)
+                                                    
+                    except Exception as e:
+                        print(e)
+                        print("Data row not published")
 
                 writeLatestTime(nodeID,sensorID,csvLatestDateTime)
                 print("================================================")
@@ -132,8 +136,8 @@ def syncDataViaMQTT(nodeID,sensorID):
         #     print("Data file not published")
         #     print(csvFile)
         
-        time.sleep(1)
-        dateTime = datetime.now() 
+        # time.sleep(1)
+        # dateTime = datetime.now() 
 
 def main():
     for nodeID in nodeIDs:
