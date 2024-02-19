@@ -13,7 +13,7 @@ mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
 print(mintsDefinitions)
 nodeIDs            = mintsDefinitions['nodeIDs']
 dataFolder         = mintsDefinitions['dataFolder']
-dataFolderMqtt         = mintsDefinitions['dataFolderMqtt']
+dataFolderMqtt     = mintsDefinitions['dataFolderMqtt']
 sensorIDs          = mintsDefinitions['sensorIDs']
 
 print()
@@ -56,44 +56,38 @@ def deleteFoldersWithOnlyDsStore(folder_path):
 
 
 if __name__ == "__main__":
-    folder_path = "/path/to/your/folder"  # Change this to the path of the folder you want to clean up
-    deleteEmptyFolders(folder_path)
 
 
- 
-for nodeID in nodeIDs:
-   
-    print("========================NODES========================")
-    print("Syncing node data for node "+ nodeID)
-    currentDate = startDate
-    includeStatements = " "
+    for nodeID in nodeIDs:
     
-    while currentDate <= endDate:
-        print("========================DATES========================")
-        currentDateStr = currentDate.strftime("%Y_%m_%d")
-        currentDate   += delta
+        print("========================NODES========================")
+        print("Syncing node data for node "+ nodeID)
+        currentDate = startDate
+        includeStatements = " "
+        
+        while currentDate <= endDate:
+            print("========================DATES========================")
+            currentDateStr = currentDate.strftime("%Y_%m_%d")
+            currentDate   += delta
 
-        for sensorID in sensorIDs:
-            print("========================SENSORS========================")
-            print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
-            includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
-            includeStatements = includeStatements + includeStatement;
-                
-    sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/gitHubRepos/raw/" + nodeID + " " + dataFolder
-    print(sysStr)
-    os.system(sysStr)
+            for sensorID in sensorIDs:
+                print("========================SENSORS========================")
+                print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
+                includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
+                includeStatements = includeStatements + includeStatement;
+                    
+        sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/gitHubRepos/raw/" + nodeID + " " + dataFolder
+        print(sysStr)
+        os.system(sysStr)
 
-    sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
-    print(sysStr)
-    os.system(sysStr)
+        sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
+        print(sysStr)
+        os.system(sysStr)
 
-    sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
-    print(sysStr)
-    os.system(sysStr)
+        sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
+        print(sysStr)
+        os.system(sysStr)
 
-    print("Deleting Emply Folder:" + dataFolder+"/"+nodeID)
-    deleteEmptyFolders(dataFolder+"/" + nodeID)
-
-print("Deleting Emply Folder:" + dataFolder)
-deleteFoldersWithOnlyDsStore(dataFolder)
-deleteEmptyFolders(dataFolder)
+    print("Deleting Emply Folder:" + dataFolder)
+    deleteFoldersWithOnlyDsStore(dataFolder)
+    deleteEmptyFolders(dataFolder)
