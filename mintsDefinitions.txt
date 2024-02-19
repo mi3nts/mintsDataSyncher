@@ -4,15 +4,15 @@ dataFolderMqtt : "/Users/lakitha/mintsData/rawMqtt"
 
 
 nodeIDs:
-   - 2cf7f12032305202
+   - 001e06318c91
   # - e45f018020cb
   # - e45f018020c7
   # - e45f017b9a66
   # - e45f01802105
   # - e45f017b9205
     
-startDate: "2023_06_15" 
-endDate: "2023_06_16"
+startDate: "2022_05_15" 
+endDate: "2023_09_16"
 
 sensorIDs:
   - IPS7100
