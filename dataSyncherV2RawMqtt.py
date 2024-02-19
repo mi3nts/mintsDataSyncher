@@ -1,10 +1,12 @@
 
 
+
 import sys
 import yaml
 import os
 import time
 import glob
+import shutil
 
 from datetime import date, timedelta, datetime
 mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
