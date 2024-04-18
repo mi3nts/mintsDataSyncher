@@ -35,10 +35,6 @@ for nodeID in nodeIDs:
         for sensorID in sensorIDs:
             print("========================SENSORS========================")
             print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
-            # print("rsync command:")
-            # sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolder
-            # print(sysStr)
-            # os.system(sysStr)
             sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  "--include='" +"*"+  sensorID + "_" + currentDateStr +  ".csv' --include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder + "/raw"
             print(sysStr)
             os.system(sysStr)

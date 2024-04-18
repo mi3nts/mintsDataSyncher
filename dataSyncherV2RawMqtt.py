@@ -71,14 +71,10 @@ if __name__ == "__main__":
                 includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
                 includeStatements = includeStatements + includeStatement;
                     
-        sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
+        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
         print(sysStr)
         os.system(sysStr)
 
-        sysStr = 'rsync -avzrtu -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
+        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
         print(sysStr)
         os.system(sysStr)
-
-    print("Deleting Emply Folder:" + dataFolder)
-    deleteFoldersWithOnlyDsStore(dataFolder)
-    deleteEmptyFolders(dataFolder)
