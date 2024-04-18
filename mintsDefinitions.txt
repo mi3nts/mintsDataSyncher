@@ -1,23 +1,22 @@
 
 dataFolder : "/Users/lakitha/mintsData/raw"
 dataFolderMqtt : "/Users/lakitha/mintsData/rawMqtt"
+latestFolder : "/Users/lakitha/mintsData/latest"
 
 
 nodeIDs:
-   - 001e06318c91
-  # - e45f018020cb
-  # - e45f018020c7
-  # - e45f017b9a66
-  # - e45f01802105
-  # - e45f017b9205
-    
-startDate: "2022_05_15" 
-endDate: "2023_09_16"
+  - 2cf7f12032305202
+
+  
+startDate: "2024_03_01" 
+endDate: "2024_03_02"
+
 
 sensorIDs:
   - IPS7100
   - IPS7100CNR
   - BME280
+  - BME280V2
   - BME688CNR
   - SCD30
   - SCD30V2
