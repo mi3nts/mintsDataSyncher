@@ -1,4 +1,4 @@
-# MintsDataSyncher
+# Mints Data Syncher
 
 ## Instructions
 1. Contact a member of the Mints team to provide your SSH public key.
