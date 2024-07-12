@@ -1,10 +1,9 @@
-# mintsDataSyncher
+# Mints Data Syncher
 
-## Instructions 
-- Copy the mintsDefinitions.txt to mintsDefinitions.yaml
-- Change date folder for where you need the data to end up
-- Specify node and sensor IDs
-- run `python3 dataSyncherRaw.py` for data collected from the rsync pipeline
-- run `python3 dataSyncherRawMqtt.py` for data collected from the mqtt pipeline (All LoRaWAN data are only collected via rsync)
-
- 
+## Instructions
+1. Contact a member of the Mints team to provide your SSH public key.
+2. Copy the file mintsDefinitions.txt and save it as mintsDefinitions.yaml.
+3. Adjust the destination folder's date to match your desired data location.
+4. Specify the node, sensor IDs, and the desired start and end date.
+5. Run `python3 dataSyncherRaw.py` to sync data from the rsync pipeline.
+6. Execute `python3 dataSyncherRawMqtt.py` to sync data from the MQTT pipeline (Note: All LoRaWAN data is exclusively collected via rsync).
