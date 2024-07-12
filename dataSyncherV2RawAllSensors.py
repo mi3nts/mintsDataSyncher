@@ -71,12 +71,12 @@ if __name__ == "__main__":
                 
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
         print(sysStr)
-        # os.system(sysStr)
+        os.system(sysStr)
 
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/gitHubRepos/raw/" + nodeID + " " + dataFolder
         print(sysStr)
-        # os.system(sysStr)
+        os.system(sysStr)
 
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
         print(sysStr)
-        # os.system(sysStr)
+        os.system(sysStr)
