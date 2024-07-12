@@ -5,7 +5,7 @@ latestFolder : "/Users/lakitha/mintsData/latest"
 
 
 nodeIDs:
-  - 2cf7f12032305202
+  - 2cf7f1203230214b
 
   
 startDate: "2024_03_01" 
