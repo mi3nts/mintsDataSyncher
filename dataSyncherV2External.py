@@ -56,7 +56,7 @@ if __name__ == "__main__":
   
     sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/test/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/external/"
     print(sysStr)
-    # os.system(sysStr)
+    os.system(sysStr)
 
     # sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/reference/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/reference/"
     # print(sysStr)
