@@ -10,9 +10,7 @@ import shutil
 
 from datetime import date, timedelta, datetime
 mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
-
 print(mintsDefinitions)
-
 nodeIDs            = mintsDefinitions['nodeIDs']
 dataFolder         = mintsDefinitions['dataFolder']
 dataFolderMqtt     = mintsDefinitions['dataFolderMqtt']
@@ -55,28 +53,36 @@ def deleteFoldersWithOnlyDsStore(folder_path):
 
 if __name__ == "__main__":
     
-    for nodeID in nodeIDs:
+
+    includeStatement = "--include='*"+ ".csv' "
+    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/Downloads/calibrated/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/calibrated/"
+    print(sysStr)
+
+
+    # for nodeID in nodeIDs:
     
-        print("========================NODES========================")
-        print("Syncing node data for node "+ nodeID)
-        currentDate = startDate
-        includeStatements = " "
+    #     print("========================NODES========================")
+    #     print("Syncing node data for node "+ nodeID)
+    #     currentDate = startDate
+    #     includeStatements = " "
         
-        while currentDate <= endDate:
-            print("========================DATES========================")
-            currentDateStr = currentDate.strftime("%Y_%m_%d")
-            currentDate   += delta
+    #     while currentDate <= endDate:
+    #         print("========================DATES========================")
+    #         currentDateStr = currentDate.strftime("%Y_%m_%d")
+    #         currentDate   += delta
 
-            for sensorID in sensorIDs:
-                print("========================SENSORS========================")
-                print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
-                includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
-                includeStatements = includeStatements + includeStatement;
-                    
-        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
-        print(sysStr)
-        os.system(sysStr)
+    #         print("Syncing data from node " + nodeID +" for the date of " + currentDateStr)
+    #         includeStatement = "--include='*"+ "_" + currentDateStr +".csv' "
+    #         includeStatements = includeStatements + includeStatement;
+                
+    #     sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/Downloads/calibrated/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/calibrated/"
+    #     print(sysStr)
+        # os.system(sysStr)
 
-        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
-        print(sysStr)
-        os.system(sysStr)
+        # sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/gitHubRepos/raw/" + nodeID + " " + dataFolder
+        # print(sysStr)
+        # # os.system(sysStr)
+
+        # sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
+        # print(sysStr)
+        # # os.system(sysStr)
