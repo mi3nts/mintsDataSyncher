@@ -55,7 +55,7 @@ if __name__ == "__main__":
     
 
     includeStatement = "--include='*"+ ".csv' "
-    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/BM3/raw/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/biometrics/"
+    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' + "mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/BM3/raw/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/biometrics/"
     print(sysStr)
     os.system(sysStr)
 
