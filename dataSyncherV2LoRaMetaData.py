@@ -55,21 +55,8 @@ if __name__ == "__main__":
     
 
     includeStatement = "--include='*"+ ".csv' "
-  
-    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/ref/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/reference/"
+    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' + "mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/LoRaNodes/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/rawMqtt/LoRaNodes/"
     print(sysStr)
     os.system(sysStr)
 
-    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/reference/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/reference/"
-    print(sysStr)
-    os.system(sysStr)
-    
-    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/referenceCar/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/reference/"
-    print(sysStr)
-    os.system(sysStr)
-    
-    sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatement+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/Downloads/reference/" + " " + "/AirPool/DISK/share-drive/Data/mintsData/reference/"
-    print(sysStr)
-    os.system(sysStr)
-
-    
+   

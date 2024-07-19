@@ -7,13 +7,27 @@ import os
 import time
 import glob
 import shutil
+import pandas as pd 
 
 from datetime import date, timedelta, datetime
 mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
-
 print(mintsDefinitions)
 
-nodeIDs            = mintsDefinitions['nodeIDs']
+
+nodeInfo                  = pd.read_csv('https://raw.githubusercontent.com/mi3nts/AirQualityAnalysisWorkflows/main/influxdb/nodered-docker/id_lookup.csv')
+print(nodeInfo)
+
+# IQ Sensors 
+nodeInfoIQ                = pd.read_csv('https://raw.githubusercontent.com/mi3nts/AirQualityAnalysisWorkflows/main/influxdb/nodered-docker/id_lookup_iq.csv')
+
+
+# node IDs should be taken only from the git 
+
+
+nodeIDs              = nodeInfo['mac_address'].tolist()
+nodeIDsIQ            = nodeInfoIQ['mac_address'].tolist()
+
+
 dataFolder         = mintsDefinitions['dataFolder']
 dataFolderMqtt     = mintsDefinitions['dataFolderMqtt']
 sensorIDs          = mintsDefinitions['sensorIDs']
@@ -21,11 +35,7 @@ sensorIDs          = mintsDefinitions['sensorIDs']
 print()
 print("MINTS")
 print()
- 
-startDate = datetime.strptime(mintsDefinitions['startDate'], '%Y_%m_%d')
-endDate = datetime.strptime(mintsDefinitions['endDate'], '%Y_%m_%d')
 
-delta      = timedelta(days=1)
 
 def deleteEmptyFolders(folder_path):
     for root, dirs, files in os.walk(folder_path, topdown=False):
@@ -59,20 +69,13 @@ if __name__ == "__main__":
     
         print("========================NODES========================")
         print("Syncing node data for node "+ nodeID)
-        currentDate = startDate
+        # currentDate = startDate
         includeStatements = " "
         
-        while currentDate <= endDate:
-            print("========================DATES========================")
-            currentDateStr = currentDate.strftime("%Y_%m_%d")
-            currentDate   += delta
-
-            for sensorID in sensorIDs:
-                print("========================SENSORS========================")
-                print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
-                includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
-                includeStatements = includeStatements + includeStatement;
-                    
+        includeStatement = "--include='*"+ ".csv' "
+        
+        includeStatements = includeStatements + includeStatement;
+                
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
         print(sysStr)
         os.system(sysStr)

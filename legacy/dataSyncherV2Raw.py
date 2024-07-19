@@ -65,10 +65,12 @@ if __name__ == "__main__":
             currentDateStr = currentDate.strftime("%Y_%m_%d")
             currentDate   += delta
 
-            print("Syncing data from node " + nodeID +" for the date of " + currentDateStr)
-            includeStatement = "--include='*"+ "_" + currentDateStr +".csv' "
-            includeStatements = includeStatements + includeStatement;
-                
+            for sensorID in sensorIDs:
+                print("========================SENSORS========================")
+                print("Syncing data from node " + nodeID + ", sensor ID " + sensorID +  " for the date of " + currentDateStr)
+                includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
+                includeStatements = includeStatements + includeStatement;
+                    
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
         print(sysStr)
         os.system(sysStr)
@@ -80,3 +82,5 @@ if __name__ == "__main__":
         sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
         print(sysStr)
         os.system(sysStr)
+
+
