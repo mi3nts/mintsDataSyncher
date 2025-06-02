@@ -1,20 +1,18 @@
 
-dataFolder : "/AirPool/DISK/share-drive/Data/mintsData/raw"
-dataFolderMqtt : "/AirPool/DISK/share-drive/Data/mintsData/rawMqtt"
-latestFolder : "/AirPool/DISK/share-drive/Data/mintsData/latest"
+dataFolder : "/Users/lakitha/mintsData/raw"
+dataFolderMqtt : "/Users/lakitha/mintsDataa/rawMqtt"
+latestFolder : "/Users/lakitha/mintsDataa/latest"
 
-startDate: "2019_01_01" 
-endDate: "2024_07_15"
+startDate: "2023_10_01" 
+endDate: "2024_11_01"
 
 nodeIDs:
-
-- 001e06373996
-- a84041ffff205e64
-- 00044be5fc9d
+- 001e064a8753
 
 
 sensorIDs:
   - IPS7100
   - BME280
+  - BME280V2
 
  

@@ -13,7 +13,7 @@ mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
 print(mintsDefinitions)
 nodeIDs            = mintsDefinitions['nodeIDs']
 dataFolder         = mintsDefinitions['dataFolder']
-dataFolderMqtt         = mintsDefinitions['dataFolderMqtt']
+dataFolderMqtt     = mintsDefinitions['dataFolderMqtt']
 sensorIDs          = mintsDefinitions['sensorIDs']
 
 print()
@@ -71,10 +71,19 @@ if __name__ == "__main__":
                 includeStatement = "--include='*"+  sensorID + "_" + currentDateStr +".csv' "
                 includeStatements = includeStatements + includeStatement;
                     
-        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
+                    
+        # sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMQTT/" + nodeID + " " + dataFolderMqtt
+        # print(sysStr)
+        # os.system(sysStr)
+
+        # sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
+        # print(sysStr)
+        # os.system(sysStr)
+
+        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/raw/" + nodeID + " " + dataFolder
         print(sysStr)
         os.system(sysStr)
 
-        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/mfs/io/groups/lary/mintsData/rawMqtt/" + nodeID + " " + dataFolderMqtt
+        sysStr = 'rsync -avzrtum -e "ssh -p 2222" ' +  includeStatements+ "--include='*/' --exclude='*' mints@mintsdata.utdallas.edu:/home/mints/raw/" + nodeID + " " + dataFolder
         print(sysStr)
         os.system(sysStr)

@@ -10,7 +10,7 @@ import shutil
 import pandas as pd 
 
 from datetime import date, timedelta, datetime
-mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
+mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"), Loader=yaml.SafeLoader)
 print(mintsDefinitions)
 
 
