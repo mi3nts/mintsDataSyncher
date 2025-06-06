@@ -9,7 +9,7 @@ import glob
 import shutil
 
 from datetime import date, timedelta, datetime
-mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"))
+mintsDefinitions         = yaml.load(open("mintsDefinitions.yaml"), Loader=yaml.SafeLoader)
 print(mintsDefinitions)
 nodeIDs            = mintsDefinitions['nodeIDs']
 dataFolder         = mintsDefinitions['dataFolder']
